@@ -1,7 +1,7 @@
 {
     "name": "export_slices",
     "displayName": "Export Slices by Linus045",
-    "description": "Adds a button to export all slices as individual .pngs (created using Shift+C)",
+    "description": "Adds a new command to export all slices as individual images",
     "version": "0.1",
     "author": { "name": "Linus045",
                 "email": "linus@willms.dev",

@@ -19,19 +19,25 @@ end
 
 
 function init(plugin)
-  print_ui("Aseprite is initializing export_slices plugin")
+  print_ui("Aseprite is initializing export_slices plugin by Linus045")
 
   -- we can use "plugin.preferences" as a table with fields for
   -- our plugin (these fields are saved between sessions)
-  if plugin.preferences.count == nil then
-    plugin.preferences.count = 0
+  if plugin.preferences.last_project_path == nil then
     plugin.preferences.last_project_path = ""
+  end
+
+  if plugin.preferences.last_output_path == nil then
     plugin.preferences.last_output_path = ""
   end
 
-  -- plugin:newMenuSeparator{
-  --   group="file_export"
-  -- }
+  if plugin.preferences.preferred_file_format == nil then
+    plugin.preferences.preferred_file_format = "{slice}.png"
+  end
+
+  if plugin.preferences.last_additional_arguments == nil then
+    plugin.preferences.last_additional_arguments = ""
+  end
 
   print_ui("- Adding Menu Group 'Linus045 Plugins' to 'File'")
   plugin:newMenuGroup{
@@ -40,10 +46,10 @@ function init(plugin)
     group="file_app"  
   }
 
-  print_ui("- Adding new command 'Export Slices to individual PNGs'")
+  print_ui("- Adding new command 'Export slices as individual images'")
   plugin:newCommand{
-    id="export_slices_to_pngs",
-    title="Export Slices to individual PNGs",
+    id="export_slices_to_images",
+    title="Export slices as individual images",
     group="linus045_plugins",
     onclick=function()
       local dlg = Dialog("Export Slices")
@@ -73,9 +79,9 @@ function init(plugin)
           dlg:repaint()
         end
       }
-      :entry{ id="file_format", label="Custom File Format:", text="{slice}.png" }
-      :entry{ id="additional_arguments", label="Additional CLI Arguments:", text="" }
-      :button{ 
+      :entry{ id="file_format", label="Custom File Format:", text=plugin.preferences.preferred_file_format }
+      :entry{ id="additional_arguments", label="Additional CLI Arguments:", text=plugin.preferences.last_additional_arguments }
+      :button{
         text="Export",
         onclick=function()
           local aseprite_file = dlg.data.project_file
@@ -102,6 +108,7 @@ function init(plugin)
             plugin.preferences.last_project_path = aseprite_file
             plugin.preferences.last_output_path = output_directory
             plugin.preferences.preferred_file_format = file_format
+            plugin.preferences.last_additional_arguments = additional_arguments
         
             local command = app.fs.appPath .. " " .. additional_arguments .." -b --split-slices \"".. aseprite_file .."\" --save-as \"" .. app.fs.joinPath(output_directory, file_format) .. "\""
             
@@ -126,7 +133,7 @@ function init(plugin)
               
               print_ui("Project file: '" .. aseprite_file .. "'")
               print_ui("Output Directory: '" .. output_directory .. "'")
-              print_ui("\n\nFinished exporting slices as individual pngs to the output directory.")            
+              print_ui("\n\nFinished exporting slices as individual files to the output directory.")            
             end
           else
             print_ui("Project file: '" .. aseprite_file .. "'")
@@ -138,13 +145,11 @@ function init(plugin)
     :show{
       wait=true
     }
-
-
   end
   }
 
   print_ui("Finished initialization\n\n")
-  print_ui("To run either use the Keyboard Command (Keyboard Shortcuts->Commands->Export Slices to individual PNGs) or\nuse the menu option in File->Linus045 Plugins->Export Slices to individual PNGs")
+  print_ui("To run either use the Keyboard Command (Keyboard Shortcuts->Commands->Export slices as individual images) or\nuse the menu option in File->Linus045 Plugins->Export slices as individual images")
 end
 
 
