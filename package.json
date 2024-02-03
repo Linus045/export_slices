@@ -1,0 +1,18 @@
+{
+    "name": "export_slices",
+    "displayName": "Export Slices by Linus045",
+    "description": "Adds a button to export all slices as individual .pngs (created using Shift+C)",
+    "version": "0.1",
+    "author": { "name": "Linus045",
+                "email": "linus@willms.dev",
+                "url": "https://github.com/Linus045/" },
+    "contributors": [ ],
+    "publisher": "Linus045",
+    "license": "MIT-0",
+    "categories": [ "Scripts" ],
+    "contributes": {
+      "scripts": [
+          { "path": "./export_slices.lua" }
+      ]
+    }
+  }
