@@ -14,6 +14,9 @@ Click the new option in `File->Linus045 Plugins->Export slices as individual ima
 
 A Dialog with text entries will appear.
 
+![Export Dialog with text entries](https://i.imgur.com/Wy1p8d8.png)
+
+
 The first one specifies the `.aseprite` project file that contains the [slices](https://www.aseprite.org/docs/slices/).
 Simply enter the path to the project file or click the button next to the entry field to use your system's file selector.
 
@@ -30,11 +33,16 @@ It is directly passed on to the [`--save-as`](https://www.aseprite.org/docs/cli/
 
 The fourth text entry is used for custom CLI arguments see [Aseprite CLI](https://www.aseprite.org/docs/cli//#options) documentation for more info.
 
+
 After pressing the `Export` button a new dialog appears with the command to execute.
 This is simply to verify everything or if necessary fix mistakes.
 Normally you can just press `Confirm` and the plugin will now execute the command to export the slices.
 
+![Command confirm dialog](https://i.imgur.com/cq590Ux.png)
+
+
 Afterwards an output dialog will open up showing the command output.
+![Command output dialog](https://i.imgur.com/Rw3cBHX.png)
 
 
 ## Note
