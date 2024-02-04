@@ -122,7 +122,7 @@ function init(plugin)
               }.data
 
             if command_dlg_data.confirm then
-              local output = capture(command, true) 
+              local output = capture(command_dlg_data.command_to_run, true) 
               print_ui("Command:")
               print_ui(command)
               print_ui("-------------------START OF OUTPUT-------------------")
