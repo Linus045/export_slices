@@ -9,7 +9,10 @@ This plugin uses aseprites CLI [`--split-slices`](https://www.aseprite.org/docs/
 
 
 ## Installation
-Simply open Aseprite's extensions menu `Edit->Preferences->Extensions` and click `Add Extension`.
+Download the extension from the [`Releases` tab](https://github.com/Linus045/export_slices/releases).
+
+Open Aseprite's extensions menu `Edit->Preferences->Extensions` and click `Add Extension`.
+
 Select the `export_slices.aseprite-extension` file and that's it.
 
 ## Usage
@@ -18,7 +21,7 @@ The name of the slice will later determine the exported filename.
 
 Here I created a few simple 16x16 sprites, each slice gets exported as an individual file:
 
-<img alt='Slicing Example' src='https://i.imgur.com/huRehHa.png' width='400'>
+<img alt='Slicing Example' src='https://i.imgur.com/TfFqPBZ.png' width='400'>
 <img alt='Exported slices' src='https://i.imgur.com/eHC3C8i.png' width='400'>
 
 
