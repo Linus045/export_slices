@@ -6,7 +6,7 @@ This plugin adds a new command that allows you to export [slices](https://www.as
 This plugin uses aseprites CLI [`--split-slices`](https://www.aseprite.org/docs/cli//#split-slices) option to export the files.
 
 
-
+See also my [Aseprite Forum Post](<https://community.aseprite.org/t/script-extension-export-slices-by-linus045-basically-a-gui-wrapper-for-the-cli-option-split-slices/21375>)
 
 ## Installation
 Download the extension from the [`Releases` tab](https://github.com/Linus045/export_slices/releases).
