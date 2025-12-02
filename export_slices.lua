@@ -110,7 +110,7 @@ function init(plugin)
             plugin.preferences.preferred_file_format = file_format
             plugin.preferences.last_additional_arguments = additional_arguments
         
-            local command = app.fs.appPath .. " " .. additional_arguments .." -b --split-slices \"".. aseprite_file .."\" --save-as \"" .. app.fs.joinPath(output_directory, file_format) .. "\""
+            local command = app.fs.appPath .. " -b \"" .. aseprite_file .. "\" " .. additional_arguments .. " --split-slices --save-as \"" .. app.fs.joinPath(output_directory, file_format) .. "\""
             
             local command_dlg_data = Dialog("Command to run")
               :entry{ id="command_to_run", label="Command to run:", text=command , focus=false}
