@@ -3,10 +3,9 @@
 ## Description
 This plugin adds a new command that allows you to export [slices](https://www.aseprite.org/docs/slices/) as individual image files.
 
-This plugin uses aseprites CLI [`--split-slices`](https://www.aseprite.org/docs/cli//#split-slices) option to export the files.
+This script utilizes Aseprite's CLI argument [`--split-slices`](https://www.aseprite.org/docs/cli//#split-slices) and passes along the project path and output directory as well as any additional parameters.
 
-
-See also my [Aseprite Forum Post](<https://community.aseprite.org/t/script-extension-export-slices-by-linus045-basically-a-gui-wrapper-for-the-cli-option-split-slices/21375>)
+Also see my [Aseprite Forum Post](<https://community.aseprite.org/t/script-extension-export-slices-by-linus045-basically-a-gui-wrapper-for-the-cli-option-split-slices/21375>)
 
 ## Installation
 Download the extension from the [`Releases` tab](https://github.com/Linus045/export_slices/releases).
@@ -29,39 +28,55 @@ Click the new option in `File->Linus045 Plugins->Export slices as individual ima
 
 A Dialog with text entries will appear.
 
-![Export Dialog with text entries](https://i.imgur.com/Wy1p8d8.png)
+![Export Dialog with text entries](https://i.imgur.com/oKD2m9o.png)
 
 ### Project File
-The first one specifies the `.aseprite` project file that contains the [slices](https://www.aseprite.org/docs/slices/).
-Simply enter the path to the project file or click the button next to the entry field to use your system's file selector.
-
+Project file specifies the `.aseprite` project file that contains the [slices](https://www.aseprite.org/docs/slices/).
+Simply enter the path to the project file or click the button next to the entry field to use the system's file selector.
 
 ### Output Directory
-The second text entry is the path to the output directory.
+This sets the path to the output directory.
 As of now the aseprite plugin API does not have a dialog element to select a directory directly via the system's file selector.
-You can either enter the path manually/paste it in or use the file selector and select any file inside the output directory, the plugin will
-automatically use the file's parent directory as output directory.
-
+You can either enter the path manually/paste it in or use the file selector and select any file inside the output directory, for example the .aseprite project file, the plugin will
+then automatically use the file's directory as output directory.
 
 ### File Format
-The third text entry specifies the output file format.
+The file format text entry specifies the exported file names for each slice.
 It is directly passed on to the [`--save-as`](https://www.aseprite.org/docs/cli//#save-as) CLI parameter.
+The `{slice}` placeholder is required and will be replaced with the slice's name.
 
+### Scaling factor
+These options allow scaling the output images.
+You can choose between selecting a value from the predefined dropdown or enter a custom value.
+It is directly passed on to the [`--scale`](https://www.aseprite.org/docs/cli//#scale) CLI parameter.
 
 ### Additional Arguments
-The fourth text entry is used for custom CLI arguments see [Aseprite CLI](https://www.aseprite.org/docs/cli//#options) documentation for more info.
+The last text entry is used for custom CLI arguments see [Aseprite CLI](https://www.aseprite.org/docs/cli//#options) documentation for more info.
+The arguments are inserted in a predetermined position inside the command, if the position is incorrect use the confirmation dialog to edit the command before running (see `Show command before running` checkbox below).
+If there is an argument you frequently use, feel free to create a GitHub issue or a message on 
+the [Aseprite Forum Post](<https://community.aseprite.org/t/script-extension-export-slices-by-linus045-basically-a-gui-wrapper-for-the-cli-option-split-slices/21375>) 
+and I might be able to add addition UI elements to make the process easier.
+
+### Close dialog after export
+This checkbox simply determines if the dialog closes after the export is done.
+
+### Show command before running
+This checkbox opens a dialog before running the actual command.
+This is simply to verify everything or, if necessary, fix mistakes.
+Normally you can just press `Confirm` and the plugin will continue to execute the command and export the slices.
+
+
+![Command confirm dialog](https://i.imgur.com/87f5LPX.png)
+
 
 ### Export Button
-After pressing the `Export` button a new dialog appears with the command to execute.
-This is simply to verify everything or if necessary fix mistakes.
-Normally you can just press `Confirm` and the plugin will now execute the command to export the slices.
-
-![Command confirm dialog](https://i.imgur.com/cq590Ux.png)
-
+After pressing the `Export` button the plugin will start exporting the slices.
 
 Afterwards an output dialog will open up showing the command output.
-![Command output dialog](https://i.imgur.com/Rw3cBHX.png)
+![Command output dialog](https://i.imgur.com/eBnrPrP.png)
 
+## Keyboard Shortcut
+It is possible to open the dialog via keyboard shortcut.
+Simply bind a new key by navigating to `Edit->Keyboard Shortcuts` and search for `Linus045`.
 
-## Note
-This script actively executes the Aseprite with CLI argument [`--split-slices`](https://www.aseprite.org/docs/cli//#split-slices) and passes in the project path and output directory.
+![Keyboard Shortcuts](https://i.imgur.com/pCT2uSZ.png)
