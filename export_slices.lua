@@ -1,13 +1,18 @@
 -- Executes cmd and returns the output
 local function capture(cmd, raw)
-  local f = assert(io.popen(cmd, 'r'))
-  local s = assert(f:read('*a'))
-  f:close()
-  if raw then return s end
-  s = string.gsub(s, '^%s+', '')
-  s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
-  return s
+  -- always redirect stderr to stdout
+  local handle = assert(io.popen(cmd.." 2>&1", 'r'))
+  local output = assert(handle:read('*a'))
+  local success, exit, signal = handle:close()
+  if raw then 
+    return output
+  end
+
+  output = string.gsub(output, '^%s+', '')
+  output = string.gsub(output, '%s+$', '')
+  output = string.gsub(output, '[\n\r]+', ' ')
+
+  return "Command exited with code: " .. tostring(signal) .. " - (" .. tostring(exit) .. ")\n" .. output
 end
 
 -- prints only when UI is available, similar to app.alert
