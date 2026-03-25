@@ -40,6 +40,10 @@ function run_export_command(dlg, command_to_run, close_dialog_after_export, asep
   print_ui("\n\nFinished exporting slices as individual files to the output directory.")
 end
 
+local function getOS()
+    return package.config:sub(1,1) == "\\" and "win" or "unix"
+end
+
 
 function init(plugin)
   print_ui("Aseprite is initializing export_slices plugin by Linus045")
@@ -214,7 +218,14 @@ function init(plugin)
               end
             end
 
-            local command = app.fs.appPath .. " -b \"" .. aseprite_file .. "\" " .. scaling_arguments .. " " .. additional_arguments .. " --split-slices --save-as \"" .. app.fs.joinPath(output_directory, file_format) .. "\""
+            local command = '"' .. app.fs.appPath .. '" -b "' .. aseprite_file .. '" ' .. scaling_arguments .. ' ' .. additional_arguments .. ' --split-slices --save-as "' .. app.fs.joinPath(output_directory, file_format) .. '"'
+
+            if getOS() == "win" then
+              -- quote the whole command to ensure spaces cause no problems on windows
+              command = '"' .. command .. '"'
+            else
+              -- TODO: test this on linux systems
+            end
 
             if show_command_before_running then
               local command_dlg_data = Dialog("Command to run")
